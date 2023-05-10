@@ -1,0 +1,38 @@
+{
+  "name": "v2-sdk",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "1.0.0",
+  "description": "An SDK for building applications on top of Koindx V2",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "keywords": [
+    "koindx",
+    "koinos"
+  ],
+  "scripts": {
+    "lint": "tsdx lint src test",
+    "build": "tsdx build",
+    "start": "tsdx watch",
+    "test": "tsdx test"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.1.1",
+    "koilib": "^5.5.6"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "@types/jest": "^24.0.25",
+    "tsdx": "^0.14.1"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true
+  }
+}
