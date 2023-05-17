@@ -19,12 +19,13 @@
     "test": "tsdx test"
   },
   "dependencies": {
+    "@uniswap/sdk": "^3.0.3",
     "bignumber.js": "^9.1.1",
     "koilib": "^5.5.6"
   },
   "devDependencies": {
-    "dotenv": "^16.0.3",
     "@types/jest": "^24.0.25",
+    "dotenv": "^16.0.3",
     "tsdx": "^0.14.1"
   },
   "engines": {

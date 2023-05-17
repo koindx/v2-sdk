@@ -1,12 +1,3 @@
+dist
 node_modules
-build
-\.idea/
-\.vs/
-*.spec.wat
-*.spec.map
-*.wasm
-*.pb
-*.sh
-*.env
-
 test
