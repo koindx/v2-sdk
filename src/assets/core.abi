@@ -1,0 +1,117 @@
+{
+    "methods": {
+        "name": {
+            "argument": "core.name_arguments",
+            "return": "core.str",
+            "description": "Get name of the token",
+            "entry-point": "0x82a3537f",
+            "read-only": true
+        },
+        "symbol": {
+            "argument": "core.symbol_arguments",
+            "return": "core.str",
+            "description": "Get the symbol of the token",
+            "entry-point": "0xb76a7ca1",
+            "read-only": true
+        },
+        "decimals": {
+            "argument": "core.decimals_arguments",
+            "return": "core.uint32",
+            "description": "Get the decimals of the token",
+            "entry-point": "0xee80fd2f",
+            "read-only": true
+        },
+        "get_info": {
+            "argument": "core.get_info_arguments",
+            "return": "core.info",
+            "description": "Get name, symbol and decimals",
+            "entry-point": "0xbd7f6850",
+            "read-only": true
+        },
+        "total_supply": {
+            "argument": "core.total_supply_arguments",
+            "return": "core.uint64",
+            "description": "Get total supply",
+            "entry-point": "0xb0da3934",
+            "read-only": true
+        },
+        "balance_of": {
+            "argument": "core.balance_of_arguments",
+            "return": "core.uint64",
+            "description": "Get balance of an account 7",
+            "entry-point": "0x5c721497",
+            "read-only": true
+        },
+        "allowance": {
+            "argument": "core.allowance_arguments",
+            "return": "core.uint64",
+            "description": "Get balance of an account2",
+            "entry-point": "0x32f09fa1",
+            "read-only": true
+        },
+        "transfer": {
+            "argument": "core.transfer_arguments",
+            "return": "core.empty_object",
+            "description": "Get balance of an account 6",
+            "entry-point": "0x27f576ca",
+            "read-only": false
+        },
+        "approve": {
+            "argument": "core.approve_arguments",
+            "return": "core.empty_object",
+            "description": "Get balance of an account 3",
+            "entry-point": "0x74e21680",
+            "read-only": false
+        },
+        "get_reserves": {
+            "argument": "core.get_reserves_arguments",
+            "return": "core.get_reserves_result",
+            "description": "initializing core contract",
+            "entry-point": "0x6d0c5abf",
+            "read-only": true
+        },
+        "initialize": {
+            "argument": "core.initialize_arguments",
+            "return": "core.empty_object",
+            "description": "initializing core contract",
+            "entry-point": "0x470ebe82",
+            "read-only": false
+        },
+        "mint": {
+            "argument": "core.mint_arguments",
+            "return": "core.uint64",
+            "description": "mint core contract",
+            "entry-point": "0xdc6f17bb",
+            "read-only": false
+        },
+        "burn": {
+            "argument": "core.burn_arguments",
+            "return": "core.burn_result",
+            "description": "mint core contract",
+            "entry-point": "0x859facc5",
+            "read-only": false
+        },
+        "swap": {
+            "argument": "core.swap_arguments",
+            "return": "core.empty_object",
+            "description": "swap core contract",
+            "entry-point": "0xda47c2f4",
+            "read-only": false
+        },
+        "skim": {
+            "argument": "core.skim_arguments",
+            "return": "core.empty_object",
+            "description": "swap core contract",
+            "entry-point": "0x769a27d2",
+            "read-only": false
+        },
+        "sync": {
+            "argument": "core.sync_arguments",
+            "return": "core.empty_object",
+            "description": "swap core contract",
+            "entry-point": "0x75c75efe",
+            "read-only": false
+        }
+    },
+    "types": "CqgRChlhc3NlbWJseS9wcm90by9jb3JlLnByb3RvEgRjb3JlGhRrb2lub3Mvb3B0aW9ucy5wcm90byIbCgNzdHISFAoFdmFsdWUYASABKAlSBXZhbHVlIh4KBnVpbnQzMhIUCgV2YWx1ZRgBIAEoDVIFdmFsdWUiIgoGdWludDY0EhgKBXZhbHVlGAEgASgEQgIwAVIFdmFsdWUiHQoFYm9vbGUSFAoFdmFsdWUYASABKAhSBXZhbHVlIg4KDGVtcHR5X29iamVjdCJOCgRpbmZvEhIKBG5hbWUYASABKAlSBG5hbWUSFgoGc3ltYm9sGAIgASgJUgZzeW1ib2wSGgoIZGVjaW1hbHMYAyABKA1SCGRlY2ltYWxzIskBCg1jb25maWdfb2JqZWN0Eh0KB3Rva2VuX2EYAiABKAxCBIC1GAZSBnRva2VuQRIdCgd0b2tlbl9iGAMgASgMQgSAtRgGUgZ0b2tlbkISFQoGa19sYXN0GAQgASgJUgVrTGFzdBIfCglyZXNlcnZlX2EYBSABKARCAjABUghyZXNlcnZlQRIfCglyZXNlcnZlX2IYBiABKARCAjABUghyZXNlcnZlQhIhCgpibG9ja190aW1lGAcgASgEQgIwAVIJYmxvY2tUaW1lIhAKDm5hbWVfYXJndW1lbnRzIhIKEHN5bWJvbF9hcmd1bWVudHMiFAoSZGVjaW1hbHNfYXJndW1lbnRzIhQKEmdldF9pbmZvX2FyZ3VtZW50cyIYChZ0b3RhbF9zdXBwbHlfYXJndW1lbnRzIjIKFGJhbGFuY2Vfb2ZfYXJndW1lbnRzEhoKBW93bmVyGAEgASgMQgSAtRgGUgVvd25lciJRChNhbGxvd2FuY2VfYXJndW1lbnRzEhoKBW93bmVyGAEgASgMQgSAtRgGUgVvd25lchIeCgdzcGVuZGVyGAIgASgMQgSAtRgGUgdzcGVuZGVyIl4KEnRyYW5zZmVyX2FyZ3VtZW50cxIYCgRmcm9tGAEgASgMQgSAtRgGUgRmcm9tEhQKAnRvGAIgASgMQgSAtRgGUgJ0bxIYCgV2YWx1ZRgDIAEoBEICMAFSBXZhbHVlImkKEWFwcHJvdmVfYXJndW1lbnRzEhoKBW93bmVyGAEgASgMQgSAtRgGUgVvd25lchIeCgdzcGVuZGVyGAIgASgMQgSAtRgGUgdzcGVuZGVyEhgKBXZhbHVlGAMgASgEQgIwAVIFdmFsdWUiGAoWZ2V0X3Jlc2VydmVzX2FyZ3VtZW50cyKRAQoTZ2V0X3Jlc2VydmVzX3Jlc3VsdBIVCgZrX2xhc3QYASABKAlSBWtMYXN0Eh8KCXJlc2VydmVfYRgCIAEoBEICMAFSCHJlc2VydmVBEh8KCXJlc2VydmVfYhgDIAEoBEICMAFSCHJlc2VydmVCEiEKCmJsb2NrX3RpbWUYBCABKARCAjABUglibG9ja1RpbWUiVAoUaW5pdGlhbGl6ZV9hcmd1bWVudHMSHQoHdG9rZW5fYRgBIAEoDEIEgLUYBlIGdG9rZW5BEh0KB3Rva2VuX2IYAiABKAxCBIC1GAZSBnRva2VuQiI+Cg5taW50X2FyZ3VtZW50cxIUCgJ0bxgBIAEoDEIEgLUYBlICdG8SFgoDZmVlGAIgASgMQgSAtRgGUgNmZWUiPgoOYnVybl9hcmd1bWVudHMSFAoCdG8YASABKAxCBIC1GAZSAnRvEhYKA2ZlZRgCIAEoDEIEgLUYBlIDZmVlIksKC2J1cm5fcmVzdWx0Eh0KCGFtb3VudF9hGAEgASgEQgIwAVIHYW1vdW50QRIdCghhbW91bnRfYhgCIAEoBEICMAFSB2Ftb3VudEIiZAoOc3dhcF9hcmd1bWVudHMSFAoCdG8YASABKAxCBIC1GAZSAnRvEh0KCGFtb3VudF9hGAIgASgEQgIwAVIHYW1vdW50QRIdCghhbW91bnRfYhgDIAEoBEICMAFSB2Ftb3VudEIiJgoOc2tpbV9hcmd1bWVudHMSFAoCdG8YASABKAxCBIC1GAZSAnRvIhAKDnN5bmNfYXJndW1lbnRzImoKEGluaXRpYWxpemVfZXZlbnQSGAoEcGFpchgBIAEoDEIEgLUYBlIEcGFpchIdCgd0b2tlbl9hGAIgASgMQgSAtRgGUgZ0b2tlbkESHQoHdG9rZW5fYhgDIAEoDEIEgLUYBlIGdG9rZW5CImwKCm1pbnRfZXZlbnQSHAoGc2VuZGVyGAEgASgMQgSAtRgGUgZzZW5kZXISHwoIYW1vdW50X2EYAiABKARCBIC1GAZSB2Ftb3VudEESHwoIYW1vdW50X2IYAyABKARCBIC1GAZSB2Ftb3VudEIiggEKCmJ1cm5fZXZlbnQSFAoCdG8YASABKAxCBIC1GAZSAnRvEhwKBnNlbmRlchgCIAEoDEIEgLUYBlIGc2VuZGVyEh8KCGFtb3VudF9hGAMgASgEQgSAtRgGUgdhbW91bnRBEh8KCGFtb3VudF9iGAQgASgEQgSAtRgGUgdhbW91bnRCItwBCgpzd2FwX2V2ZW50EhQKAnRvGAEgASgMQgSAtRgGUgJ0bxIcCgZzZW5kZXIYAiABKAxCBIC1GAZSBnNlbmRlchIkCgthbW91bnRfaW5fYRgDIAEoBEIEgLUYBlIJYW1vdW50SW5BEiQKC2Ftb3VudF9pbl9iGAQgASgEQgSAtRgGUglhbW91bnRJbkISJgoMYW1vdW50X291dF9hGAUgASgEQgSAtRgGUgphbW91bnRPdXRBEiYKDGFtb3VudF9vdXRfYhgGIAEoBEIEgLUYBlIKYW1vdW50T3V0QiJOCgpzeW5jX2V2ZW50Eh8KCXJlc2VydmVfYRgBIAEoBEICMAFSCHJlc2VydmVBEh8KCXJlc2VydmVfYhgCIAEoBEICMAFSCHJlc2VydmVCYgZwcm90bzM="
+}

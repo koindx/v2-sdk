@@ -1,26 +1,35 @@
-import { ChainId } from "./../constants";
+import { BaseCurrency } from "./baseCurrency"
+import { ChainId } from "../chains"
 
-export class Token {
-  readonly name: string | undefined;  
-  readonly symbol: string | undefined;
-  readonly decimals: number;
-  readonly chainId: ChainId;
-  readonly address: string;
-
+export class Token extends BaseCurrency {
+  public readonly isNative: false = false
+  public readonly isToken: true = true
   constructor(chainId: ChainId, address: string, decimals: number, symbol?: string, name?: string) {
-    this.name = name;
-    this.symbol = symbol;
-    this.chainId = chainId;
-    this.address = address;
-    this.decimals = decimals;
+    super(chainId, address, decimals, symbol, name)
   }
+  getAddress() {
+    return ""
+  }
+}
 
-  public equals(token: Token): boolean {
-    const equal = this.chainId === token.chainId && this.address === token.address
-    return equal;
+export class KOIN extends BaseCurrency {
+  public readonly isNative: true = true
+  public readonly isToken: false = false
+  constructor(chainId: ChainId) {
+    super(chainId, "koin", 8, "KOIN", "KOIN")
   }
-  
-  public sortsBefore(other: Token): boolean {
-    return this.address.toLowerCase() < other.address.toLowerCase()
+  getAddress() {
+    return ""
+  }
+}
+
+export class VHP extends BaseCurrency {
+  public readonly isNative: true = true
+  public readonly isToken: false = false
+  constructor(chainId: ChainId) {
+    super(chainId, "vhp", 8, "VHP", "VHP")
+  }
+  getAddress() {
+    return ""
   }
 }

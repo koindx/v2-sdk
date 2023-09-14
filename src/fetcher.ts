@@ -1,18 +1,22 @@
 import BigNumber from "bignumber.js"
-import { Provider, Contract, utils } from "koilib";
-import { Providers } from "./utils";
-import { ChainId, PERIPHERY } from "./constants";
-import { Token, Pair } from "./entities";
+import invariant from "tiny-invariant"
+import { Provider, Contract, utils } from "koilib"
+import { ZERO } from "./constants"
+import { ChainId } from "./chains"
+import { CHAIN_TO_PROVIDER_MAP } from "./providers"
+import { CHAIN_TO_ADDRESSES_MAP } from "./addresses"
+import { Token, Pair, Currency } from "./entities"
 // abis
-import CORE_ABI from "./abis/core-abi.json";
-import PERIPHERY_ABI from "./abis/periphery-abi.json";
+import { CoreAbi } from "./abis/core-abi.js"
+import { PeripheryAbi } from "./abis/periphery-abi.js"
 
 export class Fetcher {
-  async fetchTokenData(chainId: ChainId, address: string, provider?: Provider): Promise<Token> {
-    let _provider = provider;
+  static async fetchTokenData(chainId: ChainId, address: string, provider?: Provider): Promise<Currency | undefined> {
+    let _provider: Provider | undefined = provider;
     if(!provider) {
-      _provider = Providers.getProvider(chainId);
+      _provider = CHAIN_TO_PROVIDER_MAP[chainId];
     }
+    invariant(!!_provider, "PROVIDER_ERROR")
     const contract = new Contract({
       id: address,
       abi: utils.tokenAbi,
@@ -31,14 +35,19 @@ export class Fetcher {
     return new Token(chainId, address, _decimals, _symbol, _name);
   }
 
-  async fetchPairData(tokenA: Token, tokenB: Token, provider?: Provider): Promise<Pair | undefined> {
-    let _provider
+  static async fetchPairData(chainId: ChainId, tokenA: Currency, tokenB: Currency, provider?: Provider): Promise<Pair | undefined> {
+    let _provider: Provider | undefined = provider
     if(!provider) {
-      _provider = Providers.MAINNET;
+      _provider = CHAIN_TO_PROVIDER_MAP[chainId];
     }
+    invariant(tokenA.chainId == chainId, "TOKEN_A_CHAIN_ERROR")
+    invariant(tokenB.chainId == chainId, "TOKEN_A_CHAIN_ERROR")
+    invariant(tokenA.chainId == tokenB.chainId, "CHAIN_ERROR")
+    invariant(!!_provider, "PROVIDER_ERROR")
+    const addresses = CHAIN_TO_ADDRESSES_MAP[chainId];
     const periphery = new Contract({
-      id: PERIPHERY,
-      abi: PERIPHERY_ABI,
+      id: addresses.peripheryAddress,
+      abi: PeripheryAbi,
       provider: _provider,
     });
 
@@ -53,15 +62,15 @@ export class Fetcher {
       if(pair) {
         const core = new Contract({
           id: pair.value,
-          abi: CORE_ABI,
+          abi: CoreAbi,
           provider: _provider,
         });
         let reserves = (await core.functions.get_reserves()).result
         if(reserves) {
-          _kLast = reserves.kLast;
+          _kLast =  new BigNumber(reserves.kLast);
           _reserveA = new BigNumber(reserves.reserveA);
           _reserveB = new BigNumber(reserves.reserveB);
-          _blockTime = reserves.blockTime;
+          _blockTime = new BigNumber(reserves.blockTime);
         }
         let supply = (await core.functions.total_supply()).result
         if(supply) {
@@ -69,11 +78,11 @@ export class Fetcher {
         }
         _address = pair.value;
       } else {
-        return undefined;
+        return new Pair(chainId, "", _provider, tokenA, tokenB, ZERO, ZERO, ZERO, ZERO, ZERO);
       }
     } catch (error) {
       console.log(error)
     }
-    return new Pair(_address, tokenA, tokenB, _kLast, _reserveA, _reserveB, _blockTime, _totalSupply);
+    return new Pair(chainId, _address, _provider, tokenA, tokenB, _kLast, _reserveA, _reserveB, _blockTime, _totalSupply);
   }
 }

@@ -1,17 +1,5 @@
 import BigNumber from "bignumber.js"
 
-export enum ChainId {
-  MAINNET = 1,
-  TESTNET = 2
-}
-
-export enum TradeType {
-  EXACT_INPUT,
-  EXACT_OUTPUT
-}
-
-export const PERIPHERY  = ""
-
 export const MINIMUM_LIQUIDITY = new BigNumber(1000);
 
 // exports for internal consumption

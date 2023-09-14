@@ -8,6 +8,7 @@
   "description": "An SDK for building applications on top of Koindx V2",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "module": "dist/v2-sdk.esm.js",
   "keywords": [
     "koindx",
     "koinos"
@@ -19,9 +20,10 @@
     "test": "tsdx test"
   },
   "dependencies": {
-    "@uniswap/sdk": "^3.0.3",
     "bignumber.js": "^9.1.1",
-    "koilib": "^5.5.6"
+    "ethers": "5.7.2",
+    "koilib": "^5.5.6",
+    "tiny-invariant": "^1.3.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.25",

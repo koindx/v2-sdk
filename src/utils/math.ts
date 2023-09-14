@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js"
-import { ZERO, ONE, TWO,  TREE } from "../constants";
+import { ZERO, ONE, TWO,  TREE } from "../constants"
 
 export function sqrt(y: BigNumber): BigNumber {
   let z: BigNumber = ZERO;
