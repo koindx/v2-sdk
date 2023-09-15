@@ -54,7 +54,7 @@ export class Fetcher {
     invariant(!!_provider, "PROVIDER_ERROR")
     const addresses = CHAIN_TO_ADDRESSES_MAP[chainId];
     const periphery = new Contract({
-      id: addresses.peripheryAddress,
+      id: addresses.periphery,
       abi: PeripheryAbi,
       provider: _provider,
     });

@@ -1,9 +1,8 @@
 import { ChainId } from "./chains"
 
 type ChainAddresses = {
-  peripheryAddress: string
-  namespaceAddress: string
-  namespaces: string[]
+  periphery: string
+  namespace: string
 }
 
 const enum Periphery {
@@ -16,19 +15,13 @@ const enum Namespaces {
   HARBINGER = "13NQnca5chwpKm4ebHbvgvJmXrsSCTayDJ"
 }
 
-const NAMESPACES = [
-  "koin", "vhp"
-];
-
 const MAINNET_ADDRESSES: ChainAddresses = {
-  peripheryAddress: Periphery.MAINNET,
-  namespaceAddress: Namespaces.MAINNET,
-  namespaces: NAMESPACES
+  periphery: Periphery.MAINNET,
+  namespace: Namespaces.MAINNET
 }
 const HARBINGER_ADDRESSES: ChainAddresses = {
-  peripheryAddress: Periphery.HARBINGER,
-  namespaceAddress: Namespaces.HARBINGER,
-  namespaces: NAMESPACES
+  periphery: Periphery.HARBINGER,
+  namespace: Namespaces.HARBINGER
 }
 
 export const CHAIN_TO_ADDRESSES_MAP: Record<ChainId, ChainAddresses> = {
