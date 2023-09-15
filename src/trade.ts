@@ -7,10 +7,16 @@ export enum TradeType {
   EXACT_OUTPUT
 }
 
-export type TradeResult = {
-  type: TradeType
+export type TradeExactIn = {
+  amount_in: BigNumber
+  amount_out_min: BigNumber
   path: Currency[]
-  results: BigNumber[]
+}
+
+export type TradeExactOut = {
+  amount_out: BigNumber
+  amount_in_max: BigNumber
+  path: Currency[]
 }
 
 export class Router {
@@ -37,37 +43,53 @@ export class Router {
     this.output = output
   }
 
-  tradeExactOut(amount: BigNumber): TradeResult {
+  tradeExactOut(amount: BigNumber, percent: BigNumber): TradeExactOut {
     let path = this.path.map(token => token);
     let pairs = this.pairs;
     let results: BigNumber[] = new Array(path.length - 1);
     results[path.length - 1] = amount;
     for (let i = pairs.length; i > 0; i--) {
       let pair = pairs[i - 1]
+      invariant(!pair.reserve_0.isZero(), "RESERVE_A_INSUFFICIENT")
+      invariant(!pair.reserve_1.isZero(), "RESERVE_B_INSUFFICIENT")
       let result = pair.getInputAmount(path[i - 1], results[i])
+      invariant(result.isFinite(), "IS_FINITE")
       results[ i - 1 ] = result
     }
+    let amountIn = results[0];
+    let maxAmountIn = amountIn
+    if(!percent.isZero()) {
+      maxAmountIn = new BigNumber(amountIn).times(percent.div(10000)).plus(amountIn)
+    }
     return {
-      type: TradeType.EXACT_INPUT,
-      path: path,
-      results: results
+      amount_out: amount,
+      amount_in_max: maxAmountIn,
+      path: path
     }
   }
 
-  tradeExactIn(amount: BigNumber): TradeResult {
+  tradeExactIn(amount: BigNumber, percent: BigNumber): TradeExactIn {
     let path = this.path.map(token => token);
     let pairs = this.pairs;
     let results: BigNumber[] = new Array(path.length);
     results[0] = amount;
     for (let i = 0; i < pairs.length; i++) {
-      let pair = pairs[i]
+      let pair = pairs[i]      
+      invariant(!pair.reserve_0.isZero(), "RESERVE_A_INSUFFICIENT")
+      invariant(!pair.reserve_1.isZero(), "RESERVE_B_INSUFFICIENT")
       let result = pair.getOutputAmount(path[i], results[i])
+      invariant(result.isFinite(), "IS_FINITE")
       results[i + 1] = result
     }
+    let amountOut = results[ path.length - 1];
+    let minAmountOut = amountOut;
+    if(!percent.isZero()) {
+      minAmountOut = new BigNumber(amountOut).times(percent.div(10000)).minus(amountOut).times(-1)
+    }
     return {
-      type: TradeType.EXACT_OUTPUT,
-      path: path,
-      results: results
+      amount_in: amount,
+      amount_out_min: minAmountOut,
+      path: path
     }
   }
 }
