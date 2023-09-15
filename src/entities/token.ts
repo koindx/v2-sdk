@@ -7,9 +7,6 @@ export class Token extends BaseCurrency {
   constructor(chainId: ChainId, address: string, decimals: number, symbol?: string, name?: string) {
     super(chainId, address, decimals, symbol, name)
   }
-  getAddress() {
-    return ""
-  }
 }
 
 export class KOIN extends BaseCurrency {
@@ -18,9 +15,6 @@ export class KOIN extends BaseCurrency {
   constructor(chainId: ChainId) {
     super(chainId, "koin", 8, "KOIN", "KOIN")
   }
-  getAddress() {
-    return ""
-  }
 }
 
 export class VHP extends BaseCurrency {
@@ -28,8 +22,5 @@ export class VHP extends BaseCurrency {
   public readonly isToken: false = false
   constructor(chainId: ChainId) {
     super(chainId, "vhp", 8, "VHP", "VHP")
-  }
-  getAddress() {
-    return ""
   }
 }
