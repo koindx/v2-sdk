@@ -7,8 +7,7 @@ import { CHAIN_TO_PROVIDER_MAP } from "./providers"
 import { CHAIN_TO_ADDRESSES_MAP } from "./addresses"
 import { Token, Pair, Currency } from "./entities"
 // abis
-import { CoreAbi } from "./abis/core-abi.js"
-import { PeripheryAbi } from "./abis/periphery-abi.js"
+import { CoreAbi, PeripheryAbi } from "./abis"
 
 export class Fetcher {
   static async fetchTokenData(chainId: ChainId, address: string, provider?: Provider): Promise<Currency | undefined> {
@@ -22,13 +21,22 @@ export class Fetcher {
       abi: utils.tokenAbi,
       provider: _provider,
     });
-    let _name: any = "";
-    let _symbol: any = "";
-    let _decimals: any = 8;
+    let _name: string = "";
+    let _symbol: string = "";
+    let _decimals: number = 8;
     try {
-      _name = (await contract.functions.name()).result
-      _symbol = (await contract.functions.symbol()).result
-      _decimals = (await contract.functions.decimals()).result
+      let nameChain: any = (await contract.functions.name()).result      
+      if(nameChain && nameChain.value) {
+        _name = nameChain.value
+      }
+      let symbolChain: any = (await contract.functions.symbol()).result
+      if(symbolChain && symbolChain.value) {
+        _symbol = symbolChain.value
+      }
+      let decimalsChain: any = (await contract.functions.decimals()).result
+      if(decimalsChain && decimalsChain.value) {
+        _decimals = decimalsChain.value
+      }
     } catch (error) {
       console.log(error)
     }
