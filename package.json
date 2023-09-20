@@ -1,10 +1,10 @@
 {
-  "name": "@koindx/v2-sdk",
+  "name": "@koindx/sdk",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An SDK for building applications on top of Koindx V2",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
