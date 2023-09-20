@@ -1,6 +1,6 @@
-import BigNumber from "bignumber.js"
-import { Currency, Pair } from "./entities"
 import invariant from "tiny-invariant"
+import BigNumber from "bignumber.js"
+import { Currency, Pair, Percent } from "./entities"
 
 export enum TradeType {
   EXACT_INPUT,
@@ -43,7 +43,8 @@ export class Router {
     this.output = output
   }
 
-  tradeExactOut(amount: BigNumber, percent: BigNumber): TradeExactOut {
+  tradeExactOut(amount: BigNumber, percent: Percent): TradeExactOut {
+    invariant(!amount.isZero(), "AMOUNT_INSUFFICIENT")
     let path = this.path.map(token => token);
     let pairs = this.pairs;
     let results: BigNumber[] = new Array(path.length - 1);
@@ -58,8 +59,8 @@ export class Router {
     }
     let amountIn = results[0];
     let maxAmountIn = amountIn
-    if(!percent.isZero()) {
-      maxAmountIn = new BigNumber(amountIn).times(percent.div(10000)).plus(amountIn)
+    if(!percent.numerator.isZero()) {
+      maxAmountIn = amountIn.times(percent.numerator.div(percent.denominator)).plus(amountIn)
     }
     return {
       amount_out: amount,
@@ -68,7 +69,8 @@ export class Router {
     }
   }
 
-  tradeExactIn(amount: BigNumber, percent: BigNumber): TradeExactIn {
+  tradeExactIn(amount: BigNumber, percent: Percent): TradeExactIn {
+    invariant(!amount.isZero(), "AMOUNT_INSUFFICIENT")
     let path = this.path.map(token => token);
     let pairs = this.pairs;
     let results: BigNumber[] = new Array(path.length);
@@ -83,8 +85,8 @@ export class Router {
     }
     let amountOut = results[ path.length - 1];
     let minAmountOut = amountOut;
-    if(!percent.isZero()) {
-      minAmountOut = new BigNumber(amountOut).times(percent.div(10000)).minus(amountOut).times(-1)
+    if(!percent.numerator.isZero()) {
+      minAmountOut = amountOut.times(percent.numerator.div(percent.denominator)).minus(amountOut).times(-1)
     }
     return {
       amount_in: amount,

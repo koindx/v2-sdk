@@ -62,7 +62,7 @@ export class Pair {
     return liquidity
   }
 
-  public getQuote(token: Currency, amount: BigNumber) {
+  public getQuote(token: Currency, amount: BigNumber): BigNumber {
     let reservesA = token.equals(this.token_0) ? this.reserve_0 : this.reserve_1;
     let reservesB = token.equals(this.token_0) ? this.reserve_1 : this.reserve_0;
     return amount.times(reservesA).div(reservesB);
@@ -81,7 +81,7 @@ export class Pair {
     let reservesB = tokenIn.equals(this.token_0) ? this.reserve_0 : this.reserve_1;
     const amountInWithFee = new BigNumber(amountIn).times(_9975);
     const numerator = new BigNumber(amountInWithFee).times(reservesB);
-    const denominator = new BigNumber(reservesA).times(10000).plus(amountInWithFee);
+    const denominator = new BigNumber(reservesA).times(_10000).plus(amountInWithFee);
     return numerator.div(denominator);
   }
 }

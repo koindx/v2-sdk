@@ -1,5 +1,5 @@
-import BigNumber from "bignumber.js"
 import invariant from "tiny-invariant"
+import BigNumber from "bignumber.js"
 import { Provider, Contract, utils } from "koilib"
 import { ZERO } from "./constants"
 import { ChainId } from "./chains"
@@ -43,7 +43,7 @@ export class Fetcher {
     return new Token(chainId, address, _decimals, _symbol, _name);
   }
 
-  static async fetchPairData(chainId: ChainId, tokenA: Currency, tokenB: Currency, provider?: Provider): Promise<Pair | undefined> {
+  static async fetchPairData(chainId: ChainId, tokenA: Currency, tokenB: Currency, provider?: Provider): Promise<Pair> {
     let _provider: Provider | undefined = provider
     if(!provider) {
       _provider = CHAIN_TO_PROVIDER_MAP[chainId];
