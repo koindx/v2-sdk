@@ -1,5 +1,5 @@
 {
-  "name": "v2-sdk",
+  "name": "@koindx/v2-sdk",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
