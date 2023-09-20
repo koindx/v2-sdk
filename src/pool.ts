@@ -67,7 +67,4 @@ export class Pool {
       amount_b_min: minB
     }
   }
-
-  public static createPair() {
-  }
 }
