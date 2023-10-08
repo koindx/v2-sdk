@@ -49,7 +49,7 @@ export class Fetcher {
       _provider = CHAIN_TO_PROVIDER_MAP[chainId];
     }
     invariant(tokenA.chainId == chainId, "TOKEN_A_CHAIN_ERROR")
-    invariant(tokenB.chainId == chainId, "TOKEN_A_CHAIN_ERROR")
+    invariant(tokenB.chainId == chainId, "TOKEN_B_CHAIN_ERROR")
     invariant(tokenA.chainId == tokenB.chainId, "CHAIN_ERROR")
     invariant(!!_provider, "PROVIDER_ERROR")
     const addresses = CHAIN_TO_ADDRESSES_MAP[chainId];
