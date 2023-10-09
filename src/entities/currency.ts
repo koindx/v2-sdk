@@ -1,3 +1,3 @@
-import { Token, KOIN, VHP } from "./token"
+import { Token, KOIN, VHP, TKOIN } from "./token"
 
-export type Currency = KOIN | VHP | Token
+export type Currency = KOIN | VHP | TKOIN | Token
