@@ -13,7 +13,7 @@ export class KOIN extends BaseCurrency {
   public readonly isNative: true = true
   public readonly isToken: false = false
   constructor(chainId: ChainId) {
-    super(chainId, "koin", 8, "KOIN", "KOIN")
+    super(chainId, "koin", 8, "KOIN", "Koin")
   }
 }
 
@@ -21,6 +21,14 @@ export class VHP extends BaseCurrency {
   public readonly isNative: true = true
   public readonly isToken: false = false
   constructor(chainId: ChainId) {
-    super(chainId, "vhp", 8, "VHP", "VHP")
+    super(chainId, "vhp", 8, "VHP", "Virtual Hash Power")
+  }
+}
+
+export class TKOIN extends BaseCurrency {
+  public readonly isNative: true = true
+  public readonly isToken: false = false
+  constructor(chainId: ChainId) {
+    super(chainId, "koin", 8, "tKOIN", "Test Koin")
   }
 }
