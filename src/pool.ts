@@ -27,8 +27,30 @@ export class Pool {
     this.pair = pair;
   }
 
+  public addInitialLiquidity(tokenA: Currency, amountA: BigNumber, tokenB: Currency, amountB: BigNumber, percent: Percent) {
+    invariant(!amountA.isZero(), "AMOUNT_A_INSUFFICIENT")
+    invariant(!amountB.isZero(), "AMOUNT_B_INSUFFICIENT")
+    invariant(this.pair.total_supply.isZero(), "POOL_INITIALIZED")
+    invariant(!tokenA.equals(tokenB), "INVALID_PAIR")
+    let minA = amountA;
+    let minB = amountB;
+    if(!percent.numerator.isZero()) {
+      minA = amountA.times(percent.numerator.div(percent.denominator)).minus(amountA).times(-1)
+      minB = amountB.times(percent.numerator.div(percent.denominator)).minus(amountB).times(-1)
+    }
+    return {
+      token_a: tokenA,
+      token_b: tokenB,
+      amount_a_desired: amountA,
+      amount_b_desired: amountB,
+      amount_a_min: minA,
+      amount_b_min: minB
+    }
+  }
+
   public addLiquidity(token: Currency, amount: BigNumber, percent: Percent): AddLiquidity {
     invariant(!amount.isZero(), "AMOUNT_INSUFFICIENT")
+    invariant(!this.pair.total_supply.isZero(), "POOL_UNINITIALIZED")
     invariant(token.equals(this.pair.token_0) || token.equals(this.pair.token_1), "INVALID_TOKEN")
     let quote = this.pair.getQuote(token, amount)
     let _tokenA = token.equals(this.pair.token_0) ? this.pair.token_0 : this.pair.token_1;
